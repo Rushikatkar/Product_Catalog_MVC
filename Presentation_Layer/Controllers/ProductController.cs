@@ -24,8 +24,8 @@ namespace Presentation_Layer.Controllers
             _categoryService = categoryService;
         }
 
+        [Authorize(Policy = "UserAndAdmin")] // Both Admin and User can view products6
         [HttpGet("allproducts")]
-        [Authorize(Roles = "UserAndAdmin")] // Both Admin and User can view products
         public async Task<IActionResult> Index(int pageNumber = 1, int pageSize = 10, string searchQuery = null, int? categoryId = null, decimal? minPrice = null, decimal? maxPrice = null, bool? isAvailable = null)
         {
 
@@ -69,7 +69,7 @@ namespace Presentation_Layer.Controllers
 
         // GET: products/details/5
         [HttpGet("details/{id}")]
-        [Authorize(Roles = "UserAndAdmin")] // Both Admin and User can view products
+        [Authorize(Policy = "UserAndAdmin")] // Both Admin and User can view products
         public async Task<IActionResult> Details(int id)
         {
             var product = await _productService.GetProductByIdAsync(id);
@@ -81,7 +81,7 @@ namespace Presentation_Layer.Controllers
         }
 
         [HttpGet("create")]
-        [Authorize(Roles = "AdminOnly")] // Only Admin can create a product
+        [Authorize(Policy = "AdminOnly")] // Only Admin can create a product
         public IActionResult Create()
         {
             var categories = _categoryService.GetAllCategories()
@@ -109,7 +109,7 @@ namespace Presentation_Layer.Controllers
 
         // POST: products/create
         [HttpPost("create")]
-        [Authorize(Roles = "AdminOnly")] // Only Admin can edit a product
+        [Authorize(Policy = "AdminOnly")] // Only Admin can edit a product
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(AddProductDto addProductDto)
         {
@@ -129,7 +129,7 @@ namespace Presentation_Layer.Controllers
 
         // GET: products/edit/5
         [HttpGet("edit/{id}")]
-        [Authorize(Roles = "AdminOnly")] // Only Admin can create a product
+        [Authorize(Policy = "AdminOnly")] // Only Admin can create a product
         public async Task<IActionResult> Edit(int id)
         {
             var product = await _productService.GetProductByIdAsync(id);
@@ -164,7 +164,7 @@ namespace Presentation_Layer.Controllers
 
         // POST: products/edit/5
         [HttpPost("edit/{id}")]
-        [Authorize(Roles = "AdminOnly")] // Only Admin can edit a product
+        [Authorize(Policy = "AdminOnly")] // Only Admin can edit a product
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, UpdateProductDto updateProductDto, IFormFile? Image)
         {
@@ -184,7 +184,7 @@ namespace Presentation_Layer.Controllers
 
         // GET: products/delete/5
         [HttpGet("delete/{id}")]
-        [Authorize(Roles = "AdminOnly")] // Only Admin can edit a product
+        [Authorize(Policy = "AdminOnly")] // Only Admin can edit a product
         public async Task<IActionResult> Delete(int id)
         {
             var product = await _productService.GetProductByIdAsync(id);
@@ -197,7 +197,7 @@ namespace Presentation_Layer.Controllers
 
         // POST: products/delete/5
         [HttpPost("delete/{id}")]
-        [Authorize(Roles = "AdminOnly")] // Only Admin can edit a product
+        [Authorize(Policy = "AdminOnly")] // Only Admin can edit a product
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {

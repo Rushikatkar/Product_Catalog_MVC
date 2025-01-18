@@ -47,24 +47,25 @@ builder.Services.AddAuthentication(options =>
         ValidIssuer = builder.Configuration["Jwt:Issuer"],
         ValidAudience = builder.Configuration["Jwt:Audience"],
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"])),
-        RoleClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"  // Ensure RoleClaimType is correctly set
-
+        RoleClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"  // The claim where roles are stored
     };
 
-    // Allow requests without a token
+    // Look for the JWT token in the Cookie instead of Authorization header
     options.Events = new JwtBearerEvents
     {
         OnMessageReceived = context =>
         {
-            // Check if the Authorization header is missing
-            if (string.IsNullOrEmpty(context.Request.Headers["Authorization"]))
+            // Look for the JWT token in the cookies
+            var token = context.Request.Cookies["AuthToken"]; // Cookie name is "AuthToken"
+            if (!string.IsNullOrEmpty(token))
             {
-                context.NoResult(); // Skip validation if no token is provided
+                context.Token = token; // Assign the token to be used by JWT Bearer Authentication
             }
             return Task.CompletedTask;
         }
     };
 });
+
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
         .AddCookie(options =>
