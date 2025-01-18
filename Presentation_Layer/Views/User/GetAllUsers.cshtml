@@ -1,0 +1,33 @@
+﻿@model IEnumerable<DAL.DTOs.UserDTO>
+
+@{
+    ViewData["Title"] = "User List";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.Username</td>
+                <td>@user.Email</td>
+                <td>@user.Role</td>
+                <td>
+                    <a href="@Url.Action("GetUserById", "User", new { userId = user.UserId })" class="btn btn-info">View</a>
+                    <a href="@Url.Action("UpdateUser", "User", new { userId = user.UserId })" class="btn btn-primary">Edit</a>
+                    <a href="@Url.Action("DeleteUser", "User", new { userId = user.UserId })" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

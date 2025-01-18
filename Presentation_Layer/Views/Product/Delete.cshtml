@@ -1,0 +1,27 @@
+﻿@model DAL.Models.Entities.Product
+
+@{
+    ViewData["Title"] = "Delete Product";
+}
+
+<h2>Delete Product</h2>
+
+<h3>Are you sure you want to delete this product?</h3>
+
+<div>
+    <h4>@Model.Name</h4>
+    <p>Price: @Model.Price</p>
+    <p>Category: @Model.Category.CategoryName</p>
+    <p>Available: @(Model.IsAvailable ? "Yes" : "No")</p>
+</div>
+
+<form asp-action="DeleteConfirmed" method="post" asp-route-id="@Model.ProductId">
+    <!-- Hidden input to pass the ProductId -->
+    <input type="hidden" asp-for="ProductId" value="@Model.ProductId" />
+
+    <!-- Submit button for deleting the product -->
+    <button type="submit" class="btn btn-danger">Delete</button>
+
+    <!-- Cancel button to go back to the product list -->
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>

@@ -1,0 +1,7 @@
+﻿@model dynamic
+
+<h3>Are you sure you want to delete this user?</h3>
+<form asp-action="DeleteConfirmed" method="post">
+    <button type="submit" class="btn btn-danger">Yes</button>
+    <a href="@Url.Action("Index", "Home")" class="btn btn-secondary">No</a>
+</form>

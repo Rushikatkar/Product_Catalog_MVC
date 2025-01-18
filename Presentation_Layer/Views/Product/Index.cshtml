@@ -1,0 +1,85 @@
+﻿@model IEnumerable<DAL.Models.Entities.Product>
+
+@{
+    ViewData["Title"] = "Products";
+}
+
+<h2>Products</h2>
+
+<!-- Search Form -->
+<form method="get" asp-action="Index" class="mb-3">
+    <div class="row">
+        <div class="col-md-4">
+            <input type="text" name="searchQuery" value="@ViewBag.SearchQuery" class="form-control" placeholder="Search by Name or Description" />
+        </div>
+        <div class="col-md-2">
+            <select name="categoryId" class="form-control">
+                <option value="">-- Select Category --</option>
+                @foreach (var category in ViewBag.Categories as IEnumerable<SelectListItem>)
+                {
+                    <option value="@category.Value">@category.Text</option>
+                }
+            </select>
+        </div>
+        <div class="col-md-2">
+            <input type="number" name="minPrice" value="@ViewBag.MinPrice" class="form-control" placeholder="Min Price" />
+        </div>
+        <div class="col-md-2">
+            <input type="number" name="maxPrice" value="@ViewBag.MaxPrice" class="form-control" placeholder="Max Price" />
+        </div>
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+    </div>
+</form>
+
+
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Category</th>
+            <th>Available</th>
+            <th>Image</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model)
+        {
+            <tr>
+                <td>@product.ProductId</td>
+                <td>@product.Name</td>
+                <td>@product.Price</td>
+                <td>@product.Category.CategoryName</td>
+                <td>@(product.IsAvailable ? "Yes" : "No")</td>
+                <td>
+                    <img src="~/@product.ImageURL" alt="@product.Name" style="width: 100px; height: 100px;" />
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@product.ProductId" class="btn btn-info btn-sm">Details</a>
+                    <a asp-action="Edit" asp-route-id="@product.ProductId" class="btn btn-warning btn-sm">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@product.ProductId" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    <a asp-action="Create" class="btn btn-success">Add New Product</a>
+</div>
+
+<nav>
+    <ul class="pagination">
+        @for (int i = 1; i <= Math.Ceiling((double)ViewBag.TotalRecords / ViewBag.PageSize); i++)
+        {
+            <li class="page-item @(i == ViewBag.PageNumber ? "active" : "")">
+                <a class="page-link" asp-action="Index" asp-route-pageNumber="@i" asp-route-searchQuery="@ViewBag.SearchQuery" asp-route-categoryId="@ViewBag.CategoryId" asp-route-minPrice="@ViewBag.MinPrice" asp-route-maxPrice="@ViewBag.MaxPrice" asp-route-isAvailable="@ViewBag.IsAvailable">@i</a>
+            </li>
+        }
+    </ul>
+</nav>

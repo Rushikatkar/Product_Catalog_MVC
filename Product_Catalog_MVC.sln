@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.34929.205
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{7B35073E-1A88-4FFD-90FE-A2300146CF75}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BAL", "BAL\BAL.csproj", "{D58541DE-D2EF-4BC6-A90C-1C50BCB605AE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Presentation_Layer", "Presentation_Layer\Presentation_Layer.csproj", "{27CC10F4-5214-484E-87E5-1991003BAA5D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7B35073E-1A88-4FFD-90FE-A2300146CF75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B35073E-1A88-4FFD-90FE-A2300146CF75}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B35073E-1A88-4FFD-90FE-A2300146CF75}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B35073E-1A88-4FFD-90FE-A2300146CF75}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D58541DE-D2EF-4BC6-A90C-1C50BCB605AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D58541DE-D2EF-4BC6-A90C-1C50BCB605AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D58541DE-D2EF-4BC6-A90C-1C50BCB605AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D58541DE-D2EF-4BC6-A90C-1C50BCB605AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27CC10F4-5214-484E-87E5-1991003BAA5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27CC10F4-5214-484E-87E5-1991003BAA5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27CC10F4-5214-484E-87E5-1991003BAA5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27CC10F4-5214-484E-87E5-1991003BAA5D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9C350E2A-CE10-46A9-A0D4-5588985A745D}
+	EndGlobalSection
+EndGlobal
